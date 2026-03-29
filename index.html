@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header {
+            color: #c2185b;
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .valentine-text {
+            color: #c2185b;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .circle-container {
+            width: 200px;
+            height: 200px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .circle {
+            width: 100%;
+            height: 100%;
+            border: 4px solid #f06292;
+            border-radius: 50%;
+            background-color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(240, 98, 146, 0.3);
+        }
+
+        .circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            border-radius: 50%;
+        }
+
+        .circle::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #7c4dff;
+            border-radius: 50%;
+            top: 20px;
+            right: 20px;
+        }
+
+        .circle::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: #1de9b6;
+            border-radius: 2px;
+            bottom: 30px;
+            left: 30px;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .particle-1 {
+            width: 12px;
+            height: 12px;
+            background-color: #ffeb3b;
+            bottom: 40px;
+            right: 40px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .btn-no {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-no:hover {
+            transform: translateX(-100px);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #c2185b 0%, #e91e63 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(225, 30, 99, 0.3);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(225, 30, 99, 0.4);
+        }
+
+        .footer {
+            color: #999;
+            font-size: 13px;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .message {
+            display: none;
+            font-size: 24px;
+            color: #c2185b;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #e91e63;
+            animation: float 3s ease-in-out forwards;
+            font-size: 24px;
+        }
+
+        @keyframes float {
+            to {
+                transform: translateY(-500px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="header">✦ A SPECIAL QUESTION ✦</div>
+        
+        <h1>Will you be my <span class="valentine-text">Valentine?</span></h1>
+        <div class="subtitle">I really, really, really hope you say yes.</div>
+
+        <div class="circle-container">
+            <div class="circle">
+                <img src="heart.jfif" alt="Valentine's Day Image">
+                <div class="particle particle-1"></div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-no" id="noBtn" onmouseover="moveButton()" onclick="tryClick()">No</button>
+            <button class="btn btn-yes" id="yesBtn" onclick="celebrate()">Yes! 💕</button>
+        </div>
+
+        <div class="message" id="message">🎉 Yay! You made me the happiest! 💕</div>
+
+        <div class="footer">(The other button is around here somewhere...)</div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const randomX = (Math.random() - 0.5) * 400;
+            const randomY = (Math.random() - 0.5) * 200;
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        function tryClick() {
+            // Make sure the no button never actually gets clicked
+            event.preventDefault();
+            event.stopPropagation();
+            moveButton();
+        }
+
+        function celebrate() {
+            // Hide buttons and show message
+            document.querySelector('.button-container').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+
+            // Create floating hearts
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '100%';
+                    heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+                    heartsContainer.appendChild(heart);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
